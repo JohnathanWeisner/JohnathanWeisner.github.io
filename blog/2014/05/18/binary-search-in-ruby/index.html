@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
+
+<title>Binary Search in Ruby - Rubyland</title>
+<meta name="author" content="Johnathan Weisner">
+
+
+
+
+<meta name="description" content="The concept of binary search is rather simple. Divide and conquer (as long as the conquered is already sorted.) During the Phase 0 at Dev Bootcamp we &hellip;">
+
+<meta name="keywords" content=" ">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Cards -->
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content"">
+  
+  <meta name="twitter:title" content="Binary Search in Ruby">
+  <meta name="twitter:description" content="The concept of binary search is rather simple. Divide and conquer (as long as the conquered is already sorted.) During the Phase 0 at Dev Bootcamp we &hellip;">
+  <meta name="twitter:creator" content="@JoWeisner">
+
+
+<!-- Open Graph -->
+<meta property="og:local" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://johnathanweisner.github.io/blog/2014/05/18/binary-search-in-ruby">
+<meta property="og:title" content="Binary Search in Ruby">
+<meta property="og:description" content="The concept of binary search is rather simple. Divide and conquer (as long as the conquered is already sorted.) During the Phase 0 at Dev Bootcamp we &hellip;">
+
+  <meta property="og:image" content="">
+
+<meta property="og:site_name" content="Rubyland">
+
+<link rel="canonical" href="http://johnathanweisner.github.io/blog/2014/05/18/binary-search-in-ruby">
+<link href="/favicon.png" rel="icon">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/atom.xml" rel="alternate" title="Rubyland" type="application/atom+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
+
+
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="" alt="Johnathan Weisner photo" class="author-photo">
+					<h4>Johnathan Weisner</h4>
+					<p></p>
+				</li>
+				
+				
+				<li>
+					<a href="https://twitter.com/JoWeisner"><i class="fa fa-twitter"></i> Twitter</a>
+				</li>
+				
+				<li>
+					<a href="https://github.com/johnathanweisner"><i class="fa fa-github"></i> GitHub</a>
+				</li>
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/categories/">All Categories</a></li>
+			</ul>
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/blog/2014/05/18/binary-search-in-ruby/" rel="bookmark" title="Binary Search in Ruby">Binary Search in Ruby</a></h1>
+        
+        <h2>May 18, 2014</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <p>The concept of binary search is rather simple.</p>
+
+<h3>Divide and conquer</h3>
+
+<h5><em>(as long as the conquered is already sorted.)</em></h5>
+
+<p>During the Phase 0 at Dev Bootcamp we were given an assignment to write a binary search method that returns the index of an object with a specified SSN property. You could choose to write your method as a loop or recursively. To gain more recursive practice I chose that route, because who doesn’t need more practice writing recursive methods? I knew writing the code as a recursive method would be a little bit of a performance loss, but I didn’t know how much.</p>
+
+<h3>What is a student to do? <strong>Benchmark</strong>!</h3>
+
+<h6>(The built in ruby bsearch method is twice as fast as the while loop implimentation used in the code below, but there was no efficient way I could find that would allow me to return the index of the found element that was searched for.)</h6>
+
+<p>The benchmark is set to run 4 different methods.</p>
+
+<p>The first method is a pretty version of binary search I found online that I didn’t think would work all that well because it makes a new array every time it’s run defeating the purpose of Bsearch all together. But I still wanted to see how much of a performance loss that would be.</p>
+
+<p>The second method is the recursive Bsearch method I made.</p>
+
+<p>The third method is a while loop implementation of Bsearch made by Kenneth Uy from my cohort at DBC.</p>
+
+<p>The forth method is a control array.index(num) call which I believe works with linear search.</p>
+
+<p><em>With out further ado, here is the benchmark followed by the code:</em></p>
+
+<figure class='code'><figcaption><span>Ruby Binary Search Benchmarks</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>             <span class="n">real</span> <span class="n">seconds</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="ss">Pretty</span><span class="p">:</span>      <span class="mi">4</span><span class="o">.</span><span class="mi">764159</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="ss">Recursive</span><span class="p">:</span>   <span class="mi">0</span><span class="o">.</span><span class="mo">02403</span><span class="mi">9</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="no">While</span> <span class="ss">Loop</span><span class="p">:</span>  <span class="mi">0</span><span class="o">.</span><span class="mo">00</span><span class="mi">8000</span>
+</span><span class='line'><span class="no">Using</span> <span class="o">.</span><span class="n">index</span><span class="p">:</span>        <span class="mi">1</span><span class="o">.</span><span class="mi">868240</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="ss">Pretty</span><span class="p">:</span>      <span class="mi">5</span><span class="o">.</span><span class="mo">071377</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="no">Recursive</span>    <span class="mi">0</span><span class="o">.</span><span class="mo">017012</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="no">While</span> <span class="ss">Loop</span><span class="p">:</span>  <span class="mi">0</span><span class="o">.</span><span class="mo">006004</span>
+</span><span class='line'><span class="no">Using</span> <span class="o">.</span><span class="n">index</span><span class="p">:</span>        <span class="mi">0</span><span class="o">.</span><span class="mo">07104</span><span class="mi">8</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="ss">Pretty</span><span class="p">:</span>      <span class="mi">3</span><span class="o">.</span><span class="mi">774646</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="no">Recursive</span>    <span class="mi">0</span><span class="o">.</span><span class="mo">01</span><span class="mi">8012</span>
+</span><span class='line'><span class="no">Bsearch</span> <span class="no">While</span> <span class="ss">Loop</span><span class="p">:</span>  <span class="mi">0</span><span class="o">.</span><span class="mo">006004</span>
+</span><span class='line'><span class="no">Using</span> <span class="o">.</span><span class="n">index</span><span class="p">:</span>        <span class="mi">0</span><span class="o">.</span><span class="mi">175116</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">num</span><span class="o">|</span> <span class="n">num</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">bsearch</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">.</span><span class="n">each_with_index</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">bsearch</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">index</span><span class="p">)</span><span class="o">|</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">num</span> <span class="p">}</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">bsearch2</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">mid</span> <span class="o">=</span> <span class="n">get_mid</span><span class="p">(</span><span class="n">min</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">mid</span> <span class="k">if</span> <span class="n">array</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">==</span> <span class="n">num</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">max</span> <span class="o">&lt;=</span> <span class="n">min</span> <span class="o">||</span> <span class="n">mid</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">num</span> <span class="p">?</span> <span class="n">bsearch2</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span> <span class="p">:</span> <span class="n">bsearch2</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">min</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">get_mid</span><span class="p">(</span><span class="n">min</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">max</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span class='line'>  <span class="n">mid</span> <span class="o">=</span> <span class="p">((</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">ceil</span> <span class="o">+</span> <span class="n">min</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">bsearch3</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">endpoint</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">endpoint</span>
+</span><span class='line'><span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">endpoint</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">array</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">==</span> <span class="n">num</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">mid</span>
+</span><span class='line'><span class="k">elsif</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">endpoint</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;benchmark&#39;</span>
+</span><span class='line'><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+</span><span class='line'><span class="no">Benchmark</span><span class="o">.</span><span class="n">bm</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch Pretty:&quot;</span><span class="p">)</span>    <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span>  <span class="mi">9999</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch Recursive:&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch2</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch While Loop:&quot;</span><span class="p">){</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch3</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Using .index:&quot;</span><span class="p">)</span>      <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span>    <span class="mi">9999</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch Pretty:&quot;</span><span class="p">)</span>    <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span>  <span class="mi">500</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch Recursive&quot;</span><span class="p">)</span>  <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch2</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch While Loop:&quot;</span><span class="p">){</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch3</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Using .index:&quot;</span><span class="p">)</span>      <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span>    <span class="mi">500</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch Pretty:&quot;</span><span class="p">)</span>    <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span>  <span class="mi">1000</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch Recursive&quot;</span><span class="p">)</span>  <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch2</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Bsearch While Loop:&quot;</span><span class="p">){</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">bsearch3</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;Using .index:&quot;</span><span class="p">)</span>      <span class="p">{</span> <span class="n">n</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span>    <span class="mi">1000</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>I decided to go with a version of the iterative binary search because of the awesome performance</h2>
+
+<p>In the end the code that I fancied most is the code you see below.</p>
+
+<figure class='code'><figcaption><span>The code I went with</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Array</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">bsearch_get_index</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="n">high</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span>
+</span><span class='line'>      <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="nb">self</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">==</span> <span class="n">num</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">mid</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="nb">self</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span>
+</span><span class='line'>        <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="o">].</span><span class="n">bsearch_get_index</span> <span class="mi">10</span> <span class="c1"># =&gt; 2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+      <footer class="entry-meta">
+        <span class="entry-tags"></span>
+        <span><a href="/blog/2014/05/18/binary-search-in-ruby/" rel="bookmark" title="Binary Search in Ruby">Binary Search in Ruby</a> was published on <span class="entry-date date published updated"><time datetime="2014-05-18T22:23:05-04:00">May 18, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="" title="About Johnathan Weisner">Johnathan Weisner</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+      <div class="read-more">
+        
+          <div class="read-more-header">
+            <a href="/blog/2014/07/02/cards-could-be-the-future/" class="btn">Read More</a>
+          </div><!-- /.read-more-header -->
+          <div class="read-more-content">
+            <h3><a href="/blog/2014/07/02/cards-could-be-the-future/" title="Cards could be the Future">Cards could be the Future</a></h3>
+            <p>Christopher Tse gave a great talk about the technical aspects involved with creating app-like websites &#8216;Cards&#8217;.He explained Google and &hellip;&hellip; <a href="/blog/2014/07/02/cards-could-be-the-future/"> Continue reading</a></p>
+          </div><!-- /.read-more-content -->
+        
+        <div class="read-more-list">
+          
+            <div class="list-item">
+              <h4><a href="/blog/2014/06/01/initializing-a-new-rails-4-app/" title="Initializing a New Rails 4 App">Initializing a New Rails 4 App</a></h4>
+              <span>Published on June 01, 2014</span>
+            </div><!-- /.list-item -->
+          
+            <div class="list-item">
+              <h4><a href="/blog/2014/02/17/spaceship-operator/" title="Spaceship Operator">Spaceship Operator</a></h4>
+              <span>Published on February 17, 2014</span>
+            </div><!-- /.list-item -->
+          
+        </div><!-- /.read-more-list -->
+      </div><!-- /.read-more -->
+    
+    
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 Johnathan Weisner. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/Z1MM32M4N/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+
+	        
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/scripts.min.js"></script>
+
+
+
+
+
+	        
+
+</body>
+</html>

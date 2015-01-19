@@ -1,0 +1,70 @@
+<hr />
+
+<p>layout: post
+title: &ldquo;Spaceship Operator&rdquo;
+date: 2014-05-18 22:16:59 -0400
+comments: true
+categories: [Ruby, Spaceship Operator, Tutorial]</p>
+
+<h2>Week 6 in Review</h2>
+
+<p>Yesterday was the last day of week 6 and I wasn’t overly impressed with the challenge but the week was definitely necessary to hammer home all of the information we already learned.</p>
+
+<p>A huge revelation came this week! I am finally completely comfortable with recursion! This is a huge accomplishment for me because ever since I first tried to learn recursion years ago I couldn’t quite grasp it. The real revelation came with understanding base cases and their importance.</p>
+
+<p>Some fun new methods I picked up over the course of the week.</p>
+
+<h2>Array Methods:</h2>
+
+<h3>[].compact</h3>
+
+<p>This method removes nil objects from an array.
+Example of use:</p>
+
+<figure class='code'><figcaption><span>Ruby Compact Method</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="kp">nil</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="kp">nil</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="kp">nil</span><span class="o">].</span><span class="n">compact</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>&lt;=></h3>
+
+<p>This method checks to see which array starts with higher objects.
+Higher meaning the number is larger or the word/letter comes first alphabetically.
+If the first object is the same then the method moves on to check
+the next objects.
+If the higher ranked array comes first then return +1.
+If the higher ranked array comes second return -1.
+If the arrays are equal return 0.
+If the arrays can not be compared return nil.
+<em>Example of use:</em></p>
+
+<figure class='code'><figcaption><span>Ruby Spaceship Operator</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">one</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="n">two</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">]</span>
+</span><span class='line'><span class="n">one</span> <span class="o">&lt;=&gt;</span> <span class="n">two</span> <span class="c1"># =&gt; -1</span>
+</span><span class='line'><span class="n">two</span> <span class="o">&lt;=&gt;</span> <span class="n">one</span> <span class="c1"># =&gt; +1</span>
+</span><span class='line'><span class="n">one</span> <span class="o">=</span> <span class="o">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="n">two</span> <span class="o">=</span> <span class="o">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="o">]</span>
+</span><span class='line'><span class="n">one</span> <span class="o">&lt;=&gt;</span>
+</span><span class='line'><span class="n">two</span> <span class="c1"># =&gt; +1</span>
+</span><span class='line'><span class="n">two</span> <span class="o">&lt;=&gt;</span> <span class="n">one</span> <span class="c1"># =&gt; -1</span>
+</span><span class='line'><span class="n">word1</span> <span class="o">=</span> <span class="sx">%w{a b c d e}</span>
+</span><span class='line'><span class="n">word2</span> <span class="o">=</span> <span class="sx">%w{b a a a a}</span>
+</span><span class='line'><span class="n">word1</span> <span class="o">&lt;=&gt;</span> <span class="n">word2</span> <span class="c1"># =&gt; +1</span>
+</span><span class='line'><span class="n">word2</span> <span class="o">&lt;=&gt;</span> <span class="n">word1</span> <span class="c1"># =&gt; -1</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">]</span> <span class="o">&lt;=&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">]</span> <span class="c1"># =&gt; 0</span>
+</span></code></pre></td></tr></table></div></figure>
+
