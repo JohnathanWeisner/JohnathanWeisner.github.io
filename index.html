@@ -148,9 +148,7 @@
 </header>
 
 <div class="entry-content">
-  <h2>Backtracking</h2>
-
-<h3>An algorithm?</h3>
+  <h3>An algorithm?</h3>
 
 <p>The backtracking algorithm is actually a metaheuristic. It&rsquo;s an overarching idea that can be applied to many problems. The backtracking algorithm uses tree recursion to search for a valid complete solution.</p>
 
@@ -160,21 +158,14 @@
 
 <h3>Can you show me the basic steps involved with the backtracking algorithm?</h3>
 
-<p>Sure!</p>
-
-<h4>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</h4>
-
-<h4>2. Start at the first starting position.(If solve is called again find the next starting position.)</h4>
-
-<h4>3. Try the first(or next) possibility in the set of possibilities.</h4>
-
-<h4>4. Check to see if partial solution is still valid.</h4>
-
-<h4>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</h4>
-
-<h4>6. If the partial solution is valid then call this solve again starting at step one.</h4>
-
-<h4>7. If there are no valid possibilities then undo possibilty you tried and return false.</h4>
+<p>Sure!
+<em>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</em>
+<em>2. Start at the first starting position.(If solve is called again find the next starting position.)</em>
+<em>3. Try the first(or next) possibility in the set of possibilities.</em>
+<em>4. Check to see if partial solution is still valid.</em>
+<em>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</em>
+<em>6. If the partial solution is valid then call this solve again starting at step one.</em>
+<em>7. If there are no valid possibilities then undo possibilty you tried and return false.</em></p>
 
 <h3>Show me an example!</h3>
 
@@ -188,20 +179,22 @@ To do that we search for the first letter of our word. If that letter is present
 
 <p>Lets say we have the board below and we&rsquo;re looking for the word BOB.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># A | B | C | D</span>
-</span><span class='line'><span class="c1">#---------------</span>
-</span><span class='line'><span class="c1"># E | C | O | H</span>
-</span><span class='line'><span class="c1">#---------------</span>
-</span><span class='line'><span class="c1"># B | O | K | L</span>
-</span><span class='line'><span class="c1">#---------------</span>
-</span><span class='line'><span class="c1"># B | N | O | P</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'> A | B | C | D
+</span><span class='line'>---------------
+</span><span class='line'> E | C | O | H
+</span><span class='line'>---------------
+</span><span class='line'> B | O | K | L
+</span><span class='line'>---------------
+</span><span class='line'> B | N | O | P
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -225,30 +218,23 @@ If we couldn&rsquo;t find BOB with this method then we would return false.</p>
 
 <p>We used a backtracking algorithm in our minds to when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.</p>
 
-<h4>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</h4>
+<p><em>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</em>
+If there are no more letters in our word left to check for return true.</p>
 
-<p>If there are no more letters in our word left to check for return true.</p>
+<p><em>2. Start at the first starting position.(If solve is called again find the next starting position.)</em>
+Step through all of the letters on the board. If we find the first letter of the board then continue to step 3.</p>
 
-<h4>2. Start at the first starting position.(If solve is called again find the next starting position.)</h4>
+<p><em>3. Try the first(or next) possibility in the set of possibilities.</em>
+The set of possibilities are all of the letters surrounding the last letter we found. Try the first one.</p>
 
-<p>Step through all of the letters on the board. If we find the first letter of the board then continue to step 3.</p>
+<p><em>4. Check to see if partial solution is still valid.</em>
+The partial solution is valid if this letter is the next letter in the word and the cell hasn&rsquo;t been used for previous letters of the word.</p>
 
-<h4>3. Try the first(or next) possibility in the set of possibilities.</h4>
-
-<p>The set of possibilities are all of the letters surrounding the last letter we found. Try the first one.</p>
-
-<h4>4. Check to see if partial solution is still valid.</h4>
-
-<p>The partial solution is valid if this letter is the next letter in the word and the cell hasn&rsquo;t been used for previous letters of the word.</p>
-
-<h4>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</h4>
-
-<p>Look at each of these letters in order and see if they match the letter for which we are looking.</p>
-
-<h3>6. If the partial solution is valid then call this solve again starting at step one.</h3>
-
-<p>If we find the letter we are looking for and it hasn&rsquo;t been used yet then go back to step one and start looking for the next letter in the word.
-7. If there are no valid possibilities then undo possibilty you tried and return false.
+<p><em>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</em>
+Look at each of these letters in order and see if they match the letter for which we are looking.
+<em>6. If the partial solution is valid then call this solve again starting at step one.</em>
+If we find the letter we are looking for and it hasn&rsquo;t been used yet then go back to step one and start looking for the next letter in the word.
+<em>7. If there are no valid possibilities then undo possibilty you tried and return false.</em>
 If we try all of the possible letters around a letter and none of them are right return false.</p>
 
 <h3>Lets take a look at the code this would translate into.</h3>
@@ -308,63 +294,61 @@ If we try all of the possible letters around a letter and none of them are right
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
 <span class='line-number'>55</span>
-<span class='line-number'>56</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sb">``` ruby</span>
-</span><span class='line'><span class="sb">class BoggleSolver</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">BoggleSolver</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">  def initialize board_string</span>
-</span><span class='line'><span class="sb">    @board = board_string.chars.each_slice(4).map{ |row| row }</span>
-</span><span class='line'><span class="sb">    @radial_offset_coords = [</span>
-</span><span class='line'><span class="sb">      [-1,-1],[-1, 0],[-1, 1],</span>
-</span><span class='line'><span class="sb">      [ 0,-1],        [ 0, 1],</span>
-</span><span class='line'><span class="sb">      [ 1,-1],[ 1, 0],[ 1, 1]</span>
-</span><span class='line'><span class="sb">    ]</span>
-</span><span class='line'><span class="sb">  end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span> <span class="n">board_string</span>
+</span><span class='line'>    <span class="vi">@board</span> <span class="o">=</span> <span class="n">board_string</span><span class="o">.</span><span class="n">chars</span><span class="o">.</span><span class="n">each_slice</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="n">row</span> <span class="p">}</span>
+</span><span class='line'>    <span class="vi">@radial_offset_coords</span> <span class="o">=</span> <span class="o">[</span>
+</span><span class='line'>      <span class="o">[-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span><span class="o">[-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="o">[-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="o">[</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span>        <span class="o">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>      <span class="o">[</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span><span class="o">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="o">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">  def radial_search word, coords_used</span>
-</span><span class='line'><span class="sb">    return true if word.empty?</span>
-</span><span class='line'><span class="sb">    next_letter = word[0]</span>
-</span><span class='line'><span class="sb">    row, col = coords_used.last</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">radial_search</span> <span class="n">word</span><span class="p">,</span> <span class="n">coords_used</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>    <span class="n">next_letter</span> <span class="o">=</span> <span class="n">word</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords_used</span><span class="o">.</span><span class="n">last</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">    @radial_offset_coords.each do |row_offset, col_offset|</span>
-</span><span class='line'><span class="sb">      try_row, try_col = row + row_offset, col + col_offset</span>
-</span><span class='line'><span class="sb">      next unless inbounds? try_row, try_col</span>
+</span><span class='line'>    <span class="vi">@radial_offset_coords</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row_offset</span><span class="p">,</span> <span class="n">col_offset</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">try_row</span><span class="p">,</span> <span class="n">try_col</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">row_offset</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="n">col_offset</span>
+</span><span class='line'>      <span class="k">next</span> <span class="k">unless</span> <span class="n">inbounds?</span> <span class="n">try_row</span><span class="p">,</span> <span class="n">try_col</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">      if valid_next_letter? try_row, try_col, next_letter, coords_used</span>
-</span><span class='line'><span class="sb">        return true if radial_search(word[1..-1], coords_used &lt;&lt; [try_row, try_col])</span>
-</span><span class='line'><span class="sb">      end</span>
-</span><span class='line'><span class="sb">    end</span>
-</span><span class='line'><span class="sb">    false</span>
-</span><span class='line'><span class="sb">  end</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">valid_next_letter?</span> <span class="n">try_row</span><span class="p">,</span> <span class="n">try_col</span><span class="p">,</span> <span class="n">next_letter</span><span class="p">,</span> <span class="n">coords_used</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">radial_search</span><span class="p">(</span><span class="n">word</span><span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">coords_used</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">try_row</span><span class="p">,</span> <span class="n">try_col</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">  def inbounds? row, col</span>
-</span><span class='line'><span class="sb">    row &gt;= 0 &amp;&amp; row &lt;= 3 &amp;&amp; col &gt;= 0 &amp;&amp; col &lt;= 3</span>
-</span><span class='line'><span class="sb">  end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">inbounds?</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span>
+</span><span class='line'>    <span class="n">row</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">col</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">3</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">  def valid_next_letter? row, col, letter, coords_used</span>
-</span><span class='line'><span class="sb">    @board[row][col] == letter &amp;&amp; !coords_used.include?([row, col])</span>
-</span><span class='line'><span class="sb">  end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">valid_next_letter?</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">coords_used</span>
+</span><span class='line'>    <span class="vi">@board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="n">letter</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">coords_used</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="o">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">  def solve word</span>
-</span><span class='line'><span class="sb">    4.times do |row|</span>
-</span><span class='line'><span class="sb">      4.times do |col|</span>
-</span><span class='line'><span class="sb">        return true if radial_search word, [[row, col]]</span>
-</span><span class='line'><span class="sb">      end</span>
-</span><span class='line'><span class="sb">    end</span>
-</span><span class='line'><span class="sb">    false</span>
-</span><span class='line'><span class="sb">  end</span>
-</span><span class='line'><span class="sb">end</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">solve</span> <span class="n">word</span>
+</span><span class='line'>    <span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>      <span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">col</span><span class="o">|</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">radial_search</span> <span class="n">word</span><span class="p">,</span> <span class="o">[[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="o">]]</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">board = &quot;ABCDECOHBOKLBNOE&quot;</span>
-</span><span class='line'><span class="sb">board2 = &quot;XXXAXPPXLXXXXEXX&quot;</span>
-</span><span class='line'><span class="sb">solver = BoggleSolver.new(board)</span>
-</span><span class='line'><span class="sb">solver2 = BoggleSolver.new(board2)</span>
+</span><span class='line'><span class="n">board</span> <span class="o">=</span> <span class="s2">&quot;ABCDECOHBOKLBNOE&quot;</span>
+</span><span class='line'><span class="n">board2</span> <span class="o">=</span> <span class="s2">&quot;XXXAXPPXLXXXXEXX&quot;</span>
+</span><span class='line'><span class="n">solver</span> <span class="o">=</span> <span class="no">BoggleSolver</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+</span><span class='line'><span class="n">solver2</span> <span class="o">=</span> <span class="no">BoggleSolver</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">board2</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'><span class="sb">p solver.solve(&quot;BOB&quot;) == true</span>
-</span><span class='line'><span class="sb">p solver.solve(&quot;AECOK&quot;) ==  true</span>
-</span><span class='line'><span class="sb">p solver.solve(&quot;COHP&quot;) == false</span>
-</span><span class='line'><span class="sb">p solver2.solve(&quot;APPLE&quot;) == true</span>
-</span><span class='line'><span class="sb">p solver2.solve(&quot;APPLEE&quot;) == false</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;BOB&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;AECOK&quot;</span><span class="p">)</span> <span class="o">==</span>  <span class="kp">true</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;COHP&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">solver2</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;APPLE&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">solver2</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;APPLEE&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
