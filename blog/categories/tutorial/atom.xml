@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tutorial | Rubyland]]></title>
+  <link href="http://johnathanweisner.github.io/blog/categories/tutorial/atom.xml" rel="self"/>
+  <link href="http://johnathanweisner.github.io/"/>
+  <updated>2015-01-20T15:53:58-05:00</updated>
+  <id>http://johnathanweisner.github.io/</id>
+  <author>
+    <name><![CDATA[Johnathan Weisner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Backtracking]]></title>
+    <link href="http://johnathanweisner.github.io/blog/2015/01/20/backtracking/"/>
+    <updated>2015-01-20T10:32:26-05:00</updated>
+    <id>http://johnathanweisner.github.io/blog/2015/01/20/backtracking</id>
+    <content type="html"><![CDATA[<h2>Backtracking</h2>
+
+<h3>An algorithm?</h3>
+
+<p>The backtracking algorithm is actually a metaheuristic. It&rsquo;s an overarching idea that can be applied to many problems. The backtracking algorithm uses tree recursion to search for a valid complete solution.</p>
+
+<h3>What problems can be solved using the backtracking algorithm?</h3>
+
+<p>If a problem can be shown as valid in a partial form with a set amount of possiblilities for a given step then it can most likely be solved with the backtracking algorithm.</p>
+
+<h3>Can you show me the basic steps involved with the backtracking algorithm?</h3>
+
+<p>Sure!</p>
+
+<h4>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</h4>
+
+<h4>2. Start at the first starting position.(If solve is called again find the next starting position.)</h4>
+
+<h4>3. Try the first(or next) possibility in the set of possibilities.</h4>
+
+<h4>4. Check to see if partial solution is still valid.</h4>
+
+<h4>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</h4>
+
+<h4>6. If the partial solution is valid then call this solve again starting at step one.</h4>
+
+<h4>7. If there are no valid possibilities then undo possibilty you tried and return false.</h4>
+
+<h3>Show me an example!</h3>
+
+<p>Lets start with the simple example of Boggle.
+A boggle board is a 4x4 grid with single letters in each cell (except qu which come together).
+First we need to define the problem that needs solving.
+We need to find out whether a word is present on the boggle board.
+To do that we search for the first letter of our word. If that letter is present on the board then look all around that first letter for the second letter. If we find the second letter then we search all around the second letter for the third letter without looking at the previously found letters. If by using this method we find all the letters of our word this way then we know the word is on the board.</p>
+
+<p>If we don&rsquo;t find all the letters of the word this way then it&rsquo;s not present. Simple, right?</p>
+
+<p>Lets say we have the board below and we&rsquo;re looking for the word BOB.
+&#8220;` ruby</p>
+
+<h1>A | B | C | D</h1>
+
+<h1>&mdash;&mdash;&mdash;&mdash;&mdash;</h1>
+
+<h1>E | C | O | H</h1>
+
+<h1>&mdash;&mdash;&mdash;&mdash;&mdash;</h1>
+
+<h1>B | O | K | L</h1>
+
+<h1>&mdash;&mdash;&mdash;&mdash;&mdash;</h1>
+
+<h1>B | N | O | P</h1>
+
+<pre><code>
+On the top row there is a 'B' in the second cell of the first row. Lets search around that letter for the next letter 'O'. 
+Yay! We found it. 
+Cool, now lets look around the 'O' for another 'B'. 
+Damn, we only found the first 'B' again. 
+No good. 
+Lets continue looking around the first 'B' for another 'O'. 
+Nope, no luck!
+
+Okay, lets go back and start looking for the first letter again.
+Oh look at there is a 'B' at the first cell on row 3.
+Sweet.
+Lets look around the 'B' for the next letter 'O'. 
+There it is right next to it!
+Great now look around the 'O' for a different 'B' then we already found.
+Awesome, we found it on row 4 cell 1!
+BOB is present on that boggle board so we return true.
+If we couldn't find BOB with this method then we would return false.
+
+We used a backtracking algorithm in our minds to when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.
+
+####1. Check to see if the solution is complete and return the solution if it is.(The base case.)
+If there are no more letters in our word left to check for return true.
+
+####2. Start at the first starting position.(If solve is called again find the next starting position.)
+Step through all of the letters on the board. If we find the first letter of the board then continue to step 3.
+
+####3. Try the first(or next) possibility in the set of possibilities.
+The set of possibilities are all of the letters surrounding the last letter we found. Try the first one.
+
+####4. Check to see if partial solution is still valid.
+The partial solution is valid if this letter is the next letter in the word and the cell hasn't been used for previous letters of the word.
+
+####5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.
+Look at each of these letters in order and see if they match the letter for which we are looking.
+###6. If the partial solution is valid then call this solve again starting at step one.
+If we find the letter we are looking for and it hasn't been used yet then go back to step one and start looking for the next letter in the word.
+7. If there are no valid possibilities then undo possibilty you tried and return false.
+If we try all of the possible letters around a letter and none of them are right return false.
+
+
+###Lets take a look at the code this would translate into.
+</code></pre>
+
+<pre><code class="ruby">class BoggleSolver
+
+  def initialize board_string
+    @board = board_string.chars.each_slice(4).map{ |row| row }
+    @radial_offset_coords = [
+      [-1,-1],[-1, 0],[-1, 1],
+      [ 0,-1],        [ 0, 1],
+      [ 1,-1],[ 1, 0],[ 1, 1]
+    ]
+  end
+
+  def radial_search word, coords_used
+    return true if word.empty?
+    next_letter = word[0]
+    row, col = coords_used.last
+
+    @radial_offset_coords.each do |row_offset, col_offset|
+      try_row, try_col = row + row_offset, col + col_offset
+      next unless inbounds? try_row, try_col
+
+      if valid_next_letter? try_row, try_col, next_letter, coords_used
+        return true if radial_search(word[1..-1], coords_used &lt;&lt; [try_row, try_col])
+      end
+    end
+    false
+  end
+
+  def inbounds? row, col
+    row &gt;= 0 &amp;&amp; row &lt;= 3 &amp;&amp; col &gt;= 0 &amp;&amp; col &lt;= 3
+  end
+
+  def valid_next_letter? row, col, letter, coords_used
+    @board[row][col] == letter &amp;&amp; !coords_used.include?([row, col])
+  end
+
+  def solve word
+    4.times do |row|
+      4.times do |col|
+        return true if radial_search word, [[row, col]]
+      end
+    end
+    false
+  end
+end
+
+board = "ABCDECOHBOKLBNOE"
+board2 = "XXXAXPPXLXXXXEXX"
+solver = BoggleSolver.new(board)
+solver2 = BoggleSolver.new(board2)
+
+p solver.solve("BOB") == true
+p solver.solve("AECOK") ==  true
+p solver.solve("COHP") == false
+p solver2.solve("APPLE") == true
+p solver2.solve("APPLEE") == false
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Spaceship Operator]]></title>
+    <link href="http://johnathanweisner.github.io/blog/2014/05/18/spaceship-operator/"/>
+    <updated>2014-05-18T22:16:59-04:00</updated>
+    <id>http://johnathanweisner.github.io/blog/2014/05/18/spaceship-operator</id>
+    <content type="html"><![CDATA[<h2>Week 6 in Review</h2>
+
+<p>Yesterday was the last day of week 6 and I wasn’t overly impressed with the challenge but the week was definitely necessary to hammer home all of the information we already learned.</p>
+
+<p>A huge revelation came this week! I am finally completely comfortable with recursion! This is a huge accomplishment for me because ever since I first tried to learn recursion years ago I couldn’t quite grasp it. The real revelation came with understanding base cases and their importance.</p>
+
+<p>Some fun new methods I picked up over the course of the week.</p>
+
+<h2>Array Methods:</h2>
+
+<h3>[].compact</h3>
+
+<p>This method removes nil objects from an array.
+Example of use:
+<code>ruby Ruby Compact Method
+[1,nil,2,nil,5,nil].compact =&gt; [1,2,5]
+</code></p>
+
+<h3>&lt;=></h3>
+
+<p>This method checks to see which array starts with higher objects.
+Higher meaning the number is larger or the word/letter comes first alphabetically.
+If the first object is the same then the method moves on to check
+the next objects.
+If the higher ranked array comes first then return +1.
+If the higher ranked array comes second return -1.
+If the arrays are equal return 0.
+If the arrays can not be compared return nil.
+<em>Example of use:</em></p>
+
+<pre><code class="ruby Ruby Spaceship Operator">one = [1,2,3]
+two = [1,2,3,4]
+one &lt;=&gt; two # =&gt; -1
+two &lt;=&gt; one # =&gt; +1
+one = [5,1,1]
+two = [4,9,9]
+one &lt;=&gt; 
+two # =&gt; +1
+two &lt;=&gt; one # =&gt; -1
+word1 = %w{a b c d e}
+word2 = %w{b a a a a}
+word1 &lt;=&gt; word2 # =&gt; +1
+word2 &lt;=&gt; word1 # =&gt; -1
+[1,2] &lt;=&gt; [1,2] # =&gt; 0
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

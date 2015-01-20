@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Rubyland]]></title>
+  <link href="http://johnathanweisner.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://johnathanweisner.github.io/"/>
+  <updated>2015-01-20T15:53:58-05:00</updated>
+  <id>http://johnathanweisner.github.io/</id>
+  <author>
+    <name><![CDATA[Johnathan Weisner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Spaceship Operator]]></title>
+    <link href="http://johnathanweisner.github.io/blog/2014/05/18/spaceship-operator/"/>
+    <updated>2014-05-18T22:16:59-04:00</updated>
+    <id>http://johnathanweisner.github.io/blog/2014/05/18/spaceship-operator</id>
+    <content type="html"><![CDATA[<h2>Week 6 in Review</h2>
+
+<p>Yesterday was the last day of week 6 and I wasn’t overly impressed with the challenge but the week was definitely necessary to hammer home all of the information we already learned.</p>
+
+<p>A huge revelation came this week! I am finally completely comfortable with recursion! This is a huge accomplishment for me because ever since I first tried to learn recursion years ago I couldn’t quite grasp it. The real revelation came with understanding base cases and their importance.</p>
+
+<p>Some fun new methods I picked up over the course of the week.</p>
+
+<h2>Array Methods:</h2>
+
+<h3>[].compact</h3>
+
+<p>This method removes nil objects from an array.
+Example of use:
+<code>ruby Ruby Compact Method
+[1,nil,2,nil,5,nil].compact =&gt; [1,2,5]
+</code></p>
+
+<h3>&lt;=></h3>
+
+<p>This method checks to see which array starts with higher objects.
+Higher meaning the number is larger or the word/letter comes first alphabetically.
+If the first object is the same then the method moves on to check
+the next objects.
+If the higher ranked array comes first then return +1.
+If the higher ranked array comes second return -1.
+If the arrays are equal return 0.
+If the arrays can not be compared return nil.
+<em>Example of use:</em></p>
+
+<pre><code class="ruby Ruby Spaceship Operator">one = [1,2,3]
+two = [1,2,3,4]
+one &lt;=&gt; two # =&gt; -1
+two &lt;=&gt; one # =&gt; +1
+one = [5,1,1]
+two = [4,9,9]
+one &lt;=&gt; 
+two # =&gt; +1
+two &lt;=&gt; one # =&gt; -1
+word1 = %w{a b c d e}
+word2 = %w{b a a a a}
+word1 &lt;=&gt; word2 # =&gt; +1
+word2 &lt;=&gt; word1 # =&gt; -1
+[1,2] &lt;=&gt; [1,2] # =&gt; 0
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
