@@ -127,14 +127,20 @@
 
 <h3>Can you show me the basic steps involved with the backtracking algorithm?</h3>
 
-<p>Sure!
-<em>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</em>
-<em>2. Start at the first starting position.(If solve is called again find the next starting position.)</em>
-<em>3. Try the first(or next) possibility in the set of possibilities.</em>
-<em>4. Check to see if partial solution is still valid.</em>
-<em>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</em>
-<em>6. If the partial solution is valid then call this solve again starting at step one.</em>
-<em>7. If there are no valid possibilities then undo possibilty you tried and return false.</em></p>
+<p>Sure!</p>
+
+<p><em>_1. Iterate through all of the starting positions calling solve on each.</em></p>
+
+<p><strong>2. Within solve check to see if the solution is complete and return the solution if it is.(The base case.)</strong></p>
+
+<p><strong>3. Try the first(or next) possibility in the set of possibilities.</strong></p>
+
+<p><strong>4. Check to see if partial solution is still valid.</strong></p>
+
+<p><strong>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</strong>
+<strong>6. If the partial solution is valid then call this solve again starting at step one.</strong></p>
+
+<p><strong>7. If there are no valid possibilities then undo possibilty you tried and return false.</strong></p>
 
 <h3>Show me an example!</h3>
 
@@ -152,19 +158,10 @@ To do that we search for the first letter of our word. If that letter is present
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'> A | B | C | D
-</span><span class='line'>---------------
-</span><span class='line'> E | C | O | H
-</span><span class='line'>---------------
-</span><span class='line'> B | O | K | L
-</span><span class='line'>---------------
-</span><span class='line'> B | N | O | P
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'> A  B  C  D
+</span><span class='line'> E  C  O  H
+</span><span class='line'> B  O  K  L
+</span><span class='line'> B  N  O  P</span></code></pre></td></tr></table></div></figure>
 
 
 <p>On the top row there is a &lsquo;B&rsquo; in the second cell of the first row. Lets search around that letter for the next letter &lsquo;O&rsquo;.</p>
@@ -199,28 +196,28 @@ To do that we search for the first letter of our word. If that letter is present
 
 <p>If we couldn&rsquo;t find BOB with this method then we would return false.</p>
 
-<p>We used a backtracking algorithm in our minds to when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.</p>
+<p>We used a backtracking algorithm in our minds when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.</p>
 
-<p><em>1. Check to see if the solution is complete and return the solution if it is.(The base case.)</em>
-If there are no more letters in our word left to check for return true.</p>
+<p><em>_1. Iterate through all of the starting positions calling solve on each.</em>
+Step through all of the letters on the board. If we find the first letter of the board then continue to step 2.</p>
 
-<p><em>2. Start at the first starting position.(If solve is called again find the next starting position.)</em>
-Step through all of the letters on the board. If we find the first letter of the board then continue to step 3.</p>
+<p><strong>2. Within solve check to see if the solution is complete and return the solution if it is.(The base case.)</strong>
+If there are no more letters in our word remaining to check for return true.</p>
 
-<p><em>3. Try the first(or next) possibility in the set of possibilities.</em>
+<p><strong>3. Try the first(or next) possibility in the set of possibilities.</strong>
 The set of possibilities are all of the letters surrounding the last letter we found. Try the first one.</p>
 
-<p><em>4. Check to see if partial solution is still valid.</em>
+<p><strong>4. Check to see if partial solution is still valid.</strong>
 The partial solution is valid if this letter is the next letter in the word and the cell hasn&rsquo;t been used for previous letters of the word.</p>
 
-<p><em>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</em>
+<p><strong>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</strong>
 Look at each of these letters in order and see if they match the letter for which we are looking.</p>
 
-<p><em>6. If the partial solution is valid then call this solve again starting at step one.</em></p>
+<p><strong>6. If the partial solution is valid then call this solve again starting at step one.</strong></p>
 
 <p>If we find the letter we are looking for and it hasn&rsquo;t been used yet then go back to step one and start looking for the next letter in the word.</p>
 
-<p><em>7. If there are no valid possibilities then undo possibilty you tried and return false.</em></p>
+<p><strong>7. If there are no valid possibilities then undo possibilty you tried and return false.</strong></p>
 
 <p>If we try all of the possible letters around a letter and none of them are right return false.</p>
 
