@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Boggle | Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/blog/categories/boggle/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-20T16:50:37-05:00</updated>
+  <updated>2015-01-20T16:52:50-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -86,7 +86,7 @@ If we couldn&rsquo;t find BOB with this method then we would return false.</p>
 <p>We used a backtracking algorithm in our minds when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.</p>
 
 <p><strong>1. Iterate through all of the starting positions calling solve on each.</strong><br/>
-Step through all of the letters on the board. If we find the first letter of the board then continue to step 2.</p>
+Step through all of the letters on the board. If we find the first letter of the word then continue to step 2.</p>
 
 <p><strong>2. Within solve check to see if the solution is complete and return the solution if it is.(The base case.)</strong><br/>
 If there are no more letters in our word remaining to check for return true.</p>
