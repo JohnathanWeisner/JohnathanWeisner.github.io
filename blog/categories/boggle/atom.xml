@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Boggle | Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/blog/categories/boggle/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-20T16:46:03-05:00</updated>
+  <updated>2015-01-20T16:46:38-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -30,13 +30,13 @@
 
 <p>Sure!</p>
 
-<p><strong>1. Iterate through all of the starting positions calling solve on each._<br/>
-</strong>2. Within solve check to see if the solution is complete and return the solution if it is.(The base case.)<strong><br/>
-</strong>3. Try the first(or next) possibility in the set of possibilities.<strong><br/>
-</strong>4. Check to see if partial solution is still valid.<strong><br/>
-</strong>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.<strong><br/>
-</strong>6. If the partial solution is valid then call this solve again starting at step one.<strong><br/>
-</strong>7. If there are no valid possibilities then undo possibilty you tried and return false.__</p>
+<p><strong>1. Iterate through all of the starting positions calling solve on each.</strong><br/>
+<strong>2. Within solve check to see if the solution is complete and return the solution if it is.(The base case.)</strong><br/>
+<strong>3. Try the first(or next) possibility in the set of possibilities.</strong><br/>
+<strong>4. Check to see if partial solution is still valid.</strong><br/>
+<strong>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</strong><br/>
+<strong>6. If the partial solution is valid then call this solve again starting at step one.</strong><br/>
+<strong>7. If there are no valid possibilities then undo possibilty you tried and return false.</strong></p>
 
 <h3>Show me an example!</h3>
 
