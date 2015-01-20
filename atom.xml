@@ -4,7 +4,7 @@
   <title><![CDATA[Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-20T16:47:09-05:00</updated>
+  <updated>2015-01-20T16:47:42-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -49,7 +49,8 @@ We need to find out whether a word is present on the boggle board.</p>
 
 <p>To do that we search for the first letter of our word. If that letter is present on the board then look all around that first letter for the second letter. If we find the second letter then we search all around the second letter for the third letter without looking at the previously found letters. If by using this method we find all the letters of our word this way then we know the word is on the board.</p>
 
-<p>If we don&rsquo;t find all the letters of the word this way then it&rsquo;s not present.     Simple, right?</p>
+<p>If we don&rsquo;t find all the letters of the word this way then it&rsquo;s not present.<br/>
+Simple, right?</p>
 
 <p>Lets say we have the board below and we&rsquo;re looking for the word BOB.</p>
 
