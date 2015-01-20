@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sudoku | Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/blog/categories/sudoku/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-20T16:52:50-05:00</updated>
+  <updated>2015-01-20T16:54:12-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -92,7 +92,7 @@ Step through all of the letters on the board. If we find the first letter of the
 If there are no more letters in our word remaining to check for return true.</p>
 
 <p><strong>3. Try the first(or next) possibility in the set of possibilities.</strong><br/>
-The set of possibilities are all of the letters surrounding the last letter we found. Try the first one.</p>
+The set of possibilities are all of the letters surrounding the last letter we found. Try the first or next possibility.</p>
 
 <p><strong>4. Check to see if partial solution is still valid.</strong><br/>
 The partial solution is valid if this letter is the next letter in the word and the cell hasn&rsquo;t been used for previous letters of the word.</p>
