@@ -4,7 +4,7 @@
   <title><![CDATA[Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-20T16:40:55-05:00</updated>
+  <updated>2015-01-20T16:41:48-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -99,7 +99,7 @@ To do that we search for the first letter of our word. If that letter is present
 
 <p>We used a backtracking algorithm in our minds when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.</p>
 
-<p><em>_1. Iterate through all of the starting positions calling solve on each.</em>
+<p><strong>1. Iterate through all of the starting positions calling solve on each.</strong>
 Step through all of the letters on the board. If we find the first letter of the board then continue to step 2.</p>
 
 <p><strong>2. Within solve check to see if the solution is complete and return the solution if it is.(The base case.)</strong>
