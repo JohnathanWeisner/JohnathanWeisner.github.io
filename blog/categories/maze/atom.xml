@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maze | Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/blog/categories/maze/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-20T16:21:17-05:00</updated>
+  <updated>2015-01-20T16:26:26-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -59,23 +59,37 @@ To do that we search for the first letter of our word. If that letter is present
  B | N | O | P
 </code></pre>
 
-<p>On the top row there is a &lsquo;B&rsquo; in the second cell of the first row. Lets search around that letter for the next letter &lsquo;O&rsquo;.
-Yay! We found it.
-Cool, now lets look around the &lsquo;O&rsquo; for another &lsquo;B&rsquo;.
-Damn, we only found the first &lsquo;B&rsquo; again.
-No good.
-Lets continue looking around the first &lsquo;B&rsquo; for another &lsquo;O&rsquo;.
-Nope, no luck!</p>
+<p>On the top row there is a &lsquo;B&rsquo; in the second cell of the first row. Lets search around that letter for the next letter &lsquo;O&rsquo;.</p>
 
-<p>Okay, lets go back and start looking for the first letter again.
-Oh look at there is a &lsquo;B&rsquo; at the first cell on row 3.
-Sweet.
-Lets look around the &lsquo;B&rsquo; for the next letter &lsquo;O&rsquo;.
-There it is right next to it!
-Great now look around the &lsquo;O&rsquo; for a different &lsquo;B&rsquo; then we already found.
-Awesome, we found it on row 4 cell 1!
-BOB is present on that boggle board so we return true.
-If we couldn&rsquo;t find BOB with this method then we would return false.</p>
+<p>Yay! We found it.</p>
+
+<p>Cool, now lets look around the &lsquo;O&rsquo; for another &lsquo;B&rsquo;.</p>
+
+<p>Damn, we only found the first &lsquo;B&rsquo; again.</p>
+
+<p>No good.</p>
+
+<p>Lets continue looking around the first &lsquo;B&rsquo; for another &lsquo;O&rsquo;.</p>
+
+<p>Nope, no luck!</p>
+
+<p>Okay, lets go back and start looking for the first letter again.</p>
+
+<p>Oh look at there is a &lsquo;B&rsquo; at the first cell on row 3.</p>
+
+<p>Sweet.</p>
+
+<p>Lets look around the &lsquo;B&rsquo; for the next letter &lsquo;O&rsquo;.</p>
+
+<p>There it is right next to it!</p>
+
+<p>Great now look around the &lsquo;O&rsquo; for a different &lsquo;B&rsquo; then we already found.</p>
+
+<p>Awesome, we found it on row 4 cell 1!</p>
+
+<p>BOB is present on that boggle board so we return true.</p>
+
+<p>If we couldn&rsquo;t find BOB with this method then we would return false.</p>
 
 <p>We used a backtracking algorithm in our minds to when we went through that last problem. Lets go over the steps I mentioned make up the backtracking algorithm and apply them to this problem.</p>
 
@@ -92,11 +106,15 @@ The set of possibilities are all of the letters surrounding the last letter we f
 The partial solution is valid if this letter is the next letter in the word and the cell hasn&rsquo;t been used for previous letters of the word.</p>
 
 <p><em>5. If the partial solution is invalid then try the next possibility until you run out of possibilities or you find a valid partial solution.</em>
-Look at each of these letters in order and see if they match the letter for which we are looking.
-<em>6. If the partial solution is valid then call this solve again starting at step one.</em>
-If we find the letter we are looking for and it hasn&rsquo;t been used yet then go back to step one and start looking for the next letter in the word.
-<em>7. If there are no valid possibilities then undo possibilty you tried and return false.</em>
-If we try all of the possible letters around a letter and none of them are right return false.</p>
+Look at each of these letters in order and see if they match the letter for which we are looking.</p>
+
+<p><em>6. If the partial solution is valid then call this solve again starting at step one.</em></p>
+
+<p>If we find the letter we are looking for and it hasn&rsquo;t been used yet then go back to step one and start looking for the next letter in the word.</p>
+
+<p><em>7. If there are no valid possibilities then undo possibilty you tried and return false.</em></p>
+
+<p>If we try all of the possible letters around a letter and none of them are right return false.</p>
 
 <h3>Lets take a look at the code this would translate into.</h3>
 
