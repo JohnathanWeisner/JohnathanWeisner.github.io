@@ -4,7 +4,7 @@
   <title><![CDATA[Rubyland]]></title>
   <link href="http://johnathanweisner.github.io/atom.xml" rel="self"/>
   <link href="http://johnathanweisner.github.io/"/>
-  <updated>2015-01-19T16:35:31-05:00</updated>
+  <updated>2015-01-20T14:59:57-05:00</updated>
   <id>http://johnathanweisner.github.io/</id>
   <author>
     <name><![CDATA[Johnathan Weisner]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Backtracking]]></title>
+    <link href="http://johnathanweisner.github.io/blog/2015/01/20/backtracking/"/>
+    <updated>2015-01-20T00:00:00-05:00</updated>
+    <id>http://johnathanweisner.github.io/blog/2015/01/20/backtracking</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cards Could Be the Future]]></title>
